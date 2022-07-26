@@ -6,8 +6,8 @@ metadata:
   namespace: kube-system
 type: Opaque
 stringData:
-  email: YOUR_EMAIL
-  apiKey: API_TOKEN
+  email: Cloudflare_email
+  apiKey: Cloudflare_API_Token
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -30,4 +30,6 @@ data:
             customFrameOptionsValue: SAMEORIGIN
             customRequestHeaders:
               X-Forwarded-Proto: https  
+
+
  

@@ -4,8 +4,8 @@
 additionalArguments:
   - --providers.file.filename=/data/traefik-config.yaml
   - --entrypoints.websecure.http.tls.certresolver=cloudflare
-  - --entrypoints.websecure.http.tls.domains[0].main=EXAMPLE.com
-  - --entrypoints.websecure.http.tls.domains[0].sans=*.EXAMPLE.com
+  - --entrypoints.websecure.http.tls.domains[0].main=DOMAIN.com
+  - --entrypoints.websecure.http.tls.domains[0].sans=*.DOMAIN.com
   #- --certificatesresolvers.cloudflare.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
   # comment the line above when going to production
   - --certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare
@@ -16,6 +16,8 @@ additionalArguments:
   # otherwise it will not servce those requests
   - --providers.kubernetesingress.ingressclass=traefik-external
   # - --log.level=DEBUG
+  #- --experimental.plugins.fail2ban.modulename=github.com/tomMoulard/fail2ban
+  #- --experimental.plugins.fail2ban.version=v0.6.6
 
 deployment:
   enabled: true

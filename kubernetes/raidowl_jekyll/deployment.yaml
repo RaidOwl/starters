@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: raidowl-jekyll
+spec:
+  selector:
+    matchLabels:
+      app: raidowl-jekyll
+  replicas: 2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: raidowl-jekyll
+      annotations:
+        deploy-date: "deploy-date-value"
+    spec:
+      containers:
+      - name: raidowl-jekyll
+        image: raidowl/raidowl-docsite:1.0.0
+        ports: 
+          - containerPort: 80
