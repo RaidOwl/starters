@@ -2,6 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: nextcloud-shared-storage-claim
+  namespace: nextcloud
   labels:
     app: nextcloud
 spec:
@@ -9,4 +10,14 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 1000Gi # 1 TB
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nextcloud-db-secret
+  namespace: nextcloud
+data:
+  MYSQL_PASSWORD: sqlpassword
+  MYSQL_ROOT_PASSWORD: sqlrootpassword
+  MYSQL_USER: nextcloud
