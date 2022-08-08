@@ -40,7 +40,7 @@ kind: Service
 metadata:
   name: pihole-tcp
   annotations:
-    metallb.universe.tf/allow-shared-ip: pihole-svc
+    metallb.universe.tf/allow-shared-ip: pihole-svc # THIS ALLOWS SHARED IP FOR TCP/UDP 
   namespace: lab
   labels:
     app: pihole
