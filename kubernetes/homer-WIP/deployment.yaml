@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homer
+  namespace: lab
+spec:
+  selector:
+    matchLabels:
+      app: homer
+  replicas: 2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: homer
+      annotations:
+        deploy-date: "deploy-date-value"
+    spec:
+      containers:
+      - name: homer
+        image: b4bz/homer:v22.07.2
+        ports: 
+          - containerPort: 8080
+      #   volumeMounts:
+      #     - mountPath: /www/assets
+      #       name: homer-data     
+      # volumes:
+      # - name: homer-data
+      #   persistentVolumeClaim:
+      #     claimName: homer-data
+      restartPolicy: Always
