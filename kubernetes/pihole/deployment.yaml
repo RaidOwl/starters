@@ -19,22 +19,21 @@ spec:
       - name: pihole
         image: pihole/pihole:2022.07.1
         volumeMounts:
-        - name: pihole-etc
+        - name: pihole-vol
           mountPath: /etc/pihole
-        - name: pihole-dns
+          subPath: pihole
+        - name: pihole-vol
           mountPath: /etc/dnsmasq.d
+          subPath: dnsmasq
         env:
         - name: TZ
           value: "America/Chicago"
         - name: WEBPASSWORD
           value: "pihole" # CHANGE THIS
       volumes:
-      - name: pihole-etc
+      - name: pihole-vol
         persistentVolumeClaim: 
-          claimName: pihole-storage-etc
-      - name: pihole-dns
-        persistentVolumeClaim: 
-          claimName: pihole-storage-dns
+          claimName: pihole-storage
 ---
 apiVersion: v1
 kind: Service
