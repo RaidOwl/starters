@@ -18,9 +18,13 @@ spec:
       containers:
       - name: nextcloud
         image: nextcloud:24.0.3-apache
-      env:
+        env:
         - name: NEXTCLOUD_TRUSTED_DOMAINS
           value: "nextcloud.YOURDOMAIN.com"
+        volumeMounts:
+        - name: server-storage
+          mountPath: /var/www/html
+          subPath: server-data
       volumes:
       - name: server-storage
         persistentVolumeClaim:
