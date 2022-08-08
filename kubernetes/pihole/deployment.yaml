@@ -27,7 +27,7 @@ spec:
         - name: TZ
           value: "America/Chicago"
         - name: WEBPASSWORD
-          value: "pihole"
+          value: "pihole" # CHANGE THIS
       volumes:
       - name: pihole-etc
         persistentVolumeClaim: 
@@ -46,7 +46,7 @@ metadata:
   labels:
     app: pihole
 spec:
-  loadBalancerIP: 192.168.40.244
+  loadBalancerIP: 192.168.40.244 # YOUR METALLB IP
   selector:
     pod-label: pihole-pod
   type: LoadBalancer
@@ -70,7 +70,7 @@ metadata:
   labels:
     app: pihole
 spec:
-  loadBalancerIP: 192.168.40.244
+  loadBalancerIP: 192.168.40.244 # YOUR METALLB IP (SAME AS ABOVE)
   selector:
     pod-label: pihole-pod
   type: LoadBalancer
