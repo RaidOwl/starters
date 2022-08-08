@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pihole
+  namespace: lab
+  labels:
+    app: pihole
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      pod-label: pihole-pod
+  template:
+    metadata:
+      labels:
+        pod-label: pihole-pod
+    spec:
+      containers:
+      - name: pihole
+        image: pihole/pihole:2022.07.1
+        volumeMounts:
+        - name: pihole-etc
+          mountPath: /etc/pihole
+        - name: pihole-dns
+          mountPath: /etc/dnsmasq.d
+        env:
+        - name: TZ
+          value: "America/Chicago"
+        - name: WEBPASSWORD
+          value: "pihole"
+      volumes:
+      - name: pihole-etc
+        persistentVolumeClaim: 
+          claimName: pihole-storage-etc
+      - name: pihole-dns
+        persistentVolumeClaim: 
+          claimName: pihole-storage-dns
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pihole-tcp
+  annotations:
+    metallb.universe.tf/allow-shared-ip: pihole-svc
+  namespace: lab
+  labels:
+    app: pihole
+spec:
+  loadBalancerIP: 192.168.40.244
+  selector:
+    pod-label: pihole-pod
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    name: http
+    port: 80
+    targetPort: 80
+  - protocol: TCP
+    name: dnst
+    port: 53
+    targetPort: 53
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pihole-udp
+  annotations:
+    metallb.universe.tf/allow-shared-ip: pihole-svc
+  namespace: lab
+  labels:
+    app: pihole
+spec:
+  loadBalancerIP: 192.168.40.244
+  selector:
+    pod-label: pihole-pod
+  type: LoadBalancer
+  ports:
+  - protocol: UDP
+    name: dnsu
+    port: 53
+    targetPort: 53
