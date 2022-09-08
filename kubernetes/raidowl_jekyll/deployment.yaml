@@ -18,6 +18,6 @@ spec:
     spec:
       containers:
       - name: raidowl-jekyll
-        image: raidowl/raidowl-docsite:1.0.1
+        image: raidowl/raidowl-docsite:latest
         ports: 
           - containerPort: 80
