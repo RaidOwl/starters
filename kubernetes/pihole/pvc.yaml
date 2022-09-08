@@ -8,7 +8,7 @@ metadata:
 spec:
   storageClassName: longhorn-ssd
   accessModes:
-  - ReadWriteMany #for ReadWriteMany, ensure you have nfs utility installed on the hosts (apt install nfs-common)
+  - ReadWriteOnce #for ReadWriteMany, ensure you have nfs utility installed on the hosts (apt install nfs-common)
   resources:
     requests:
       storage: 5Gi
