@@ -6,7 +6,7 @@ metadata:
   labels:
     app: pihole
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       pod-label: pihole-pod
