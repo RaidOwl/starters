@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homarr
+  namespace: lab
+  labels:
+    app: homarr
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homarr
+  template:
+    metadata:
+      labels:
+        app: homarr
+    spec:
+      containers:
+        - name: homarr
+          image: ghcr.io/ajnart/homarr:0.9.2
+          ports:
+            - name: http
+              containerPort: 7575
+          env:
+            - name: PASSWORD
+              value: "password"
+          volumeMounts:
+            - mountPath: /app/data/configs
+              name: homarr-configs
+              subPath: homarrconfigs
+            - mountPath: /app/public/icons
+              name: homarr-icons
+              subPath: homarricons
+      volumes:
+        - name: homarr-configs
+          persistentVolumeClaim:
+            claimName: homarr-config
+        - name: homarr-icons
+          persistentVolumeClaim:
+            claimName: homarr-icon
+
+

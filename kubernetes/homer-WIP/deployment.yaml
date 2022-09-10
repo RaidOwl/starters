@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: homer
-  replicas: 2
+  replicas: 1
   strategy:
     type: Recreate
   template:
@@ -19,14 +19,14 @@ spec:
     spec:
       containers:
       - name: homer
-        image: b4bz/homer:v22.07.2
+        image: b4bz/homer:v22.08.1
         ports: 
           - containerPort: 8080
-      #   volumeMounts:
-      #     - mountPath: /www/assets
-      #       name: homer-data     
-      # volumes:
-      # - name: homer-data
-      #   persistentVolumeClaim:
-      #     claimName: homer-data
+        volumeMounts:
+          - mountPath: /www/assets
+            name: homer-data     
+      volumes:
+      - name: homer-data
+        persistentVolumeClaim:
+          claimName: homer-data
       restartPolicy: Always

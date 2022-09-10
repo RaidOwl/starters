@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashy
+  namespace: lab
+  labels:
+    app: dashy
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashy
+  template:
+    metadata:
+      labels:
+        app: dashy
+    spec:
+      containers:
+        - name: dashy
+          image: lissy93/dashy:2.1.1
+          ports:
+            - name: http
+              containerPort: 80
+      #     volumeMounts:
+      #       - mountPath: /app/public/conf.yml
+      #         name: dashy-v
+      # volumes:
+      #   - name: dashy-v
+      #     persistentVolumeClaim:
+      #       claimName: dashy-pv
+      # fRnd-dPWZ-uKde-nidn
+
+

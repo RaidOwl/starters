@@ -1,0 +1,294 @@
+---
+# Homepage configuration
+# See https://fontawesome.com/v5/search for icons options
+
+# Optional: Use external configuration file.
+# Using this will ignore remaining config in this file
+# externalConfig: https://example.com/server-luci/config.yaml
+
+title: "App dashboard"
+subtitle: "Homer"
+# documentTitle: "Welcome" # Customize the browser tab text
+logo: "logo.png"
+# Alternatively a fa icon can be provided:
+# icon: "fas fa-skull-crossbones"
+
+header: true # Set to false to hide the header
+# Optional: Different hotkey for search, defaults to "/"
+# hotkey:
+#   search: "Shift"
+footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>' # set false if you want to hide it.
+
+columns: "3" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
+connectivityCheck: true # whether you want to display a message when the apps are not accessible anymore (VPN disconnected for example).
+                        # You should set it to true when using an authentication proxy, it also reloads the page when a redirection is detected when checking connectivity.
+
+# Optional: Proxy / hosting option
+proxy:
+  useCredentials: false # send cookies & authorization headers when fetching service specific data. Set to `true` if you use an authentication proxy. Can be overrided on service level. 
+
+# Set the default layout and color scheme
+defaults:
+  layout: columns # Either 'columns', or 'list'
+  colorTheme: dark # One of 'auto', 'light', or 'dark'
+
+# Optional theming
+theme: default # 'default' or one of the themes available in 'src/assets/themes'.
+
+# Optional custom stylesheet
+# Will load custom CSS files. Especially useful for custom icon sets.
+# stylesheet:
+#   - "assets/custom.css"
+
+# Here is the exhaustive list of customization parameters
+# However all value are optional and will fallback to default if not set.
+# if you want to change only some of the colors, feel free to remove all unused key.
+colors:
+  light:
+    highlight-primary: "#3367d6"
+    highlight-secondary: "#4285f4"
+    highlight-hover: "#5a95f5"
+    background: "#f5f5f5"
+    card-background: "#ffffff"
+    text: "#363636"
+    text-header: "#424242"
+    text-title: "#303030"
+    text-subtitle: "#424242"
+    card-shadow: rgba(0, 0, 0, 0.1)
+    link: "#3273dc"
+    link-hover: "#363636"
+    background-image: "assets/your/light/bg.png"
+  dark:
+    highlight-primary: "#3367d6"
+    highlight-secondary: "#4285f4"
+    highlight-hover: "#5a95f5"
+    background: "#131313"
+    card-background: "#2b2b2b"
+    text: "#eaeaea"
+    text-header: "#ffffff"
+    text-title: "#fafafa"
+    text-subtitle: "#f5f5f5"
+    card-shadow: rgba(0, 0, 0, 0.4)
+    link: "#3273dc"
+    link-hover: "#ffdd57"
+    background-image: "assets/your/dark/bg.png"
+
+# Optional message
+message:
+  # url: "https://<my-api-endpoint>" # Can fetch information from an endpoint to override value below.
+  # mapping: # allows to map fields from the remote format to the one expected by Homer
+  #   title: 'id' # use value from field 'id' as title
+  #   content: 'value' # value from field 'value' as content
+  # refreshInterval: 10000 # Optional: time interval to refresh message
+  #
+  # Real example using chucknorris.io for showing Chuck Norris facts as messages:
+  # url: https://api.chucknorris.io/jokes/random
+  # mapping:
+  #   title: 'id'
+  #   content: 'value'
+  # refreshInterval: 10000
+
+  # style: "is-warning"
+  # title: "Optional message!"
+  # icon: "fa fa-exclamation-triangle"
+  # content: "Here is all my stuff"
+
+# Optional navbar
+# links: [] # Allows for navbar (dark mode, layout, and search) without any links
+links:
+  - name: "YouTube"
+    icon: "fab fa-youtube"
+    url: "https://youtube.com/c/raidowl"
+    target: "_blank" # optional html tag target attribute
+  - name: "Github"
+    icon: "fab fa-github"
+    url: "https://github.com/raidowl"
+    target: "_blank"
+  # this will link to a second homer page that will load config from page2.yml and keep default config values as in config.yml file
+  # see url field and assets/page.yml used in this example:
+  #- name: "Second Page"
+   # icon: "fas fa-file-alt"
+    #url: "#page2"
+
+# Services
+# First level array represents a group.
+# Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
+services:
+  - name: "Servers"
+    icon: "fas fa-server"
+    # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
+    # logo: "path/to/logo"
+    items:
+      - name: "Proxmox Main"
+        logo: "assets/icons/proxmox.png"
+        # Alternatively a fa icon can be provided:
+        # icon: "fab fa-jenkins"
+        subtitle: "EPYC 7302"
+        tag: "server"
+        keywords: "hypervisor server" # optional keyword used for searching purpose
+        url: "https://epyc.raidowllab.com:8006/"
+        target: "_blank" # optional html tag target attribute
+      - name: "Proxmox Backup"
+        logo: "assets/icons/proxmox.png"
+        subtitle: "Xeon"
+        keywords: "hypervisor server backup"
+        tag: "server"
+        # Optional tagstyle
+        # tagstyle: "is-success"
+        url: "https://backup.raidowllab.com:8006/"
+        target: "_blank" 
+      - name: "Test Server"
+        logo: "assets/icons/proxmox.png"
+        subtitle: "Xeon E3-1275"
+        keywords: "hypervisor server test"
+        tag: "server"
+        url: "https://test.raidowllab.com:8006/"
+        target: "_blank" 
+      - name: "Remote Server"
+        logo: "assets/icons/truenas.png"
+        subtitle: "i5 4590T"
+        keywords: "hypervisor server remote"
+        tag: "server"
+        url: "https://test.raidowllab.com:8006/"
+        target: "_blank" 
+  - name: "Virtualization"
+    icon: "fas fa-computer"
+    items:
+      - name: "TrueNAS"
+        logo: "assets/icons/truenas.png"
+        subtitle: "On EPYC"
+        tag: "virtualization"
+        keywords: "storage"
+        url: "http://nas.raidowllab.com/"
+        #type: "PiHole" # optional, loads a specific component that provides extra features. MUST MATCH a file name (without file extension) available in `src/components/services`
+        target: "_blank" # optional html a tag target attribute
+        # class: "green" # optional custom CSS class for card, useful with custom stylesheet
+        # background: red # optional color for card to set color directly without custom stylesheet
+      - name: "Portainer"
+        logo: "assets/icons/portainer.png"
+        #subtitle: "On EPYC"
+        tag: "virtualization"
+        keywords: "docker"
+        url: "http://portainer.raidowllab.com:9000/"
+        target: "_blank" # optional html tag target attribute
+        type: "Portainer"
+        apikey: "ptr_bcb7Rin0gd3hoNKkltPs83Nb8Ifj7CV9cWFfUczfM9Y="
+      - name: "Portainer Backup"
+        logo: "assets/icons/portainer.png"
+        #subtitle: "On EPYC"
+        tag: "virtualization"
+        keywords: "docker backup"
+        url: "http://portainerbackup.raidowllab.com:9000/"
+        target: "_blank" # optional html tag target attribute
+      - name: "Rancher"
+        logo: "assets/icons/rancher.png"
+        subtitle: "192.168.40.91-93"
+        tag: "k3s"
+        keywords: "kubernetes k3s"
+        url: "http://rancher.raidowllab.com:9000/"
+        target: "_blank" # optional html tag target attribute
+  - name: "Networking"
+    icon: "fas fa-network-wired"
+    items:
+      - name: "pfSense"
+        logo: "assets/icons/pfsense.png"
+        subtitle: "SG-4100"
+        tag: "router"
+        keywords: "network router"
+        url: "http://10.0.0.1/"
+        target: "_blank"
+      - name: "Unifi"
+        logo: "assets/icons/unifi.png"
+        subtitle: "Cloud Key 2.0"
+        tag: "unifi"
+        keywords: "network"
+        url: "http://10.0.0.103/"
+        target: "_blank"
+      - name: "IPMI"
+        icon: "fas fa-ethernet"
+        subtitle: "ASRock Rack"
+        tag: "IPMI"
+        keywords: "network"
+        url: "https://ipmi.raidowllab.com/#dashboard"
+        target: "_blank"
+      - name: "PiHole"
+        logo: "assets/icons/pihole.png"
+        #subtitle: "dns k3s"
+        tag: "dns"
+        keywords: "network dns k3s"
+        url: "http://192.168.40.244/"
+        target: "_blank"
+        type: "PiHole"
+      - name: "Traefik"
+        logo: "assets/icons/traefik.png"
+        subtitle: "Ingress"
+        tag: "dns"
+        keywords: "network k3s ingress"
+        url: "https://192.168.40.242/"
+        target: "_blank"
+  - name: "Services"
+    icon: "fas fa-project-diagram"
+    items:
+      - name: "Uptime Kuma"
+        logo: "assets/icons/uptime-kuma.png"
+        subtitle: ""
+        tag: "monitoring"
+        keywords: "monitor"
+        url: "http://portainer.raidowllab.com:3001"
+        target: "_blank"
+      - name: "Syncthing"
+        logo: "assets/icons/syncthing.png"
+        subtitle: "Main"
+        tag: "storage"
+        keywords: "storage"
+        url: "http://portainer.raidowllab.com:8384"
+        target: "_blank"
+      - name: "Syncthing Backup"
+        logo: "assets/icons/syncthing.png"
+        subtitle: "Backup"
+        tag: "storage"
+        keywords: "storage backup"
+        url: "http://portainerbackup.raidowllab.com:8384"
+        target: "_blank"
+      - name: "Longhorn"
+        logo: "assets/icons/longhorn.png"
+        subtitle: "Storage"
+        tag: "storage"
+        keywords: "storage k3s"
+        url: "http://longhorn.raidowllab.com/#/dashboard"
+        target: "_blank"
+  - name: "Media"
+    icon: "fas fa-photo-video"
+    items:
+      - name: "Plex"
+        logo: "assets/icons/plex.png"
+        subtitle: "Ubuntu"
+        tag: "Plex"
+        keywords: "VM media"
+        url: "http://10.0.0.28:32400"
+        target: "_blank"
+      - name: "Sonarr"
+        logo: "assets/icons/sonarr.png"
+        subtitle: "In Docker"
+        tag: "TV Shows"
+        keywords: "docker media"
+        url: "http://portainer.raidowllab.com:8989/"
+        type: "Sonarr"
+        apikey: "6c65683bc6d1403aa1cf36990a5c948e"
+        target: "_blank"
+      - name: "Radarr"
+        logo: "assets/icons/radarr.png"
+        subtitle: "In Docker"
+        tag: "Movies"
+        keywords: "docker media"
+        url: "http://portainer.raidowllab.com:7878/"
+        type: "Radarr"
+        apikey: "ad3f982f4ccc43feaa683fc70fb400f7"
+        target: "_blank"
+      - name: "Overseerr"
+        logo: "assets/icons/overseerr.png"
+        subtitle: "In Docker"
+        tag: "Media"
+        keywords: "docker media"
+        url: "http://portainer.raidowllab.com:5055/"
+        target: "_blank"

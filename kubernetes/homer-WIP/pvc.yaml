@@ -4,9 +4,9 @@ metadata:
   name: homer-data
   namespace: lab
 spec:
-  storageClassName: longhorn-hdd
+  storageClassName: longhorn-ssd
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi

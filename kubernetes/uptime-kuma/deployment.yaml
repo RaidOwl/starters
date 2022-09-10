@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uptime-kuma
+  namespace: lab
+spec:
+  selector:
+    matchLabels:
+      app: uptime-kuma
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: uptime-kuma
+      annotations:
+        deploy-date: "deploy-date-value"
+    spec:
+      containers:
+      - name: kuma
+        image: louislam/uptime-kuma:1.18.0
+        env:
+          - name: UPTIME_KUMA_PORT
+            value: "3001"
+          - name: PORT
+            value: "3001"
+        ports:
+          - name: uptime-kuma
+            containerPort: 3001
+            protocol: TCP
+        volumeMounts:
+          - mountPath: /app/data
+            name: kuma-data     
+      volumes:
+      - name: kuma-data
+        persistentVolumeClaim:
+          claimName: kuma-data
+      restartPolicy: Always

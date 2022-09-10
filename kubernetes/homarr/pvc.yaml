@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: homarr-icon
+  namespace: lab
+  labels:
+    app: homarr
+spec:
+  storageClassName: longhorn-ssd
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi 
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: homarr-config
+  namespace: lab
+  labels:
+    app: homarr
+spec:
+  storageClassName: longhorn-ssd
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
