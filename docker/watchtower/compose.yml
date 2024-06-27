@@ -9,7 +9,7 @@ services:
     #command: --interval 86400 --debug list of containers to monitor
     environment:
       WATCHTOWER_DISABLE_CONTAINERS: "it-tools cloudflare-ddns nextcloud-aio-watchtower nextcloud-aio-mastercontainer nextcloud-aio-collabora nextcloud-aio-talk nextcloud-aio-database nextcloud-aio-redis nextcloud-aio-fulltextsearch nextcloud-aio-talk-recording nextcloud-aio-imaginary nextcloud-aio-nextcloud nextcloud-aio-notify-push"
-      WATCHTOWER_SCHEDULE: "0 1 * * *"
+      WATCHTOWER_SCHEDULE: "0 0 1 * * *"
       WATCHTOWER_CLEANUP: true
       WATCHTOWER_NOTIFICATIONS: email
       WATCHTOWER_NOTIFICATION_EMAIL_FROM: "email@yourdomain.com"
